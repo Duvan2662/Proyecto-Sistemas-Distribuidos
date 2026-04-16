@@ -18,7 +18,7 @@ async function bootstrap() {
   );
 
   await app.listen();
-  console.log('🟢 Nodo ARTES corriendo en puerto gRPC 5003');
+  console.log('Nodo ARTES corriendo en puerto gRPC 5003');
 }
 
 bootstrap();

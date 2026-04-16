@@ -48,7 +48,7 @@ export class GatewayService implements OnModuleInit {
       if (resultado) {
         if (sede !== sedeOrigen) {
           this.logger.warn(
-            `⚠️  FALLOVER: Nodo [${sedeOrigen}] no disponible. Respuesta obtenida desde [${sede}]`
+            `FALLOVER: Nodo [${sedeOrigen}] no disponible. Respuesta obtenida desde [${sede}]`
           );
         }
         return {
@@ -58,7 +58,7 @@ export class GatewayService implements OnModuleInit {
         };
       }
 
-      this.logger.error(`❌ Nodo [${sede}] no responde. Intentando siguiente...`);
+      this.logger.error(`Nodo [${sede}] no responde. Intentando siguiente...`);
     }
 
     return {

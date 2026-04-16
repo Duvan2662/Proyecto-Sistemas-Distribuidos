@@ -21,10 +21,10 @@ export class SedeModuleFactory {
       imports: [
         TypeOrmModule.forRoot({
           type: 'postgres',
-          host: 'localhost',
-          port: options.dbPort,
-          username: 'postgres',
-          password: 'Duvan26-',
+          host: process.env.DB_HOST || 'localhost',
+          port: parseInt(process.env.DB_PORT) || 5432,
+          username: process.env.DB_USER || 'postgres',
+          password: process.env.DB_PASS,
           database: options.dbName,
           entities: [Libro, Sede, Prestamo, Usuario],
           synchronize: true, // Solo para desarrollo — en producción usar migraciones

@@ -18,7 +18,7 @@ async function bootstrap() {
   );
 
   await app.listen();
-  console.log('🟢 Nodo TECNOLÓGICA corriendo en puerto gRPC 5002');
+  console.log('Nodo TECNOLOGICA corriendo en puerto gRPC 5002');
 }
 
 bootstrap();

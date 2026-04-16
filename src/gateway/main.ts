@@ -11,7 +11,7 @@ async function bootstrap() {
   });
 
   await app.listen(3000);
-  console.log('🟢 API Gateway corriendo en http://localhost:3000');
+  console.log('API Gateway corriendo en http://localhost:3000');
   console.log('   Endpoints disponibles:');
   console.log('   GET  /api/libros/buscar?titulo=X&sede=Y');
   console.log('   GET  /api/libros?sede=Y');

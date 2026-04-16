@@ -7,6 +7,8 @@
  */
 
 import 'reflect-metadata';
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { DataSource } from 'typeorm';
 import { Libro, EstadoLibro } from './common/entities/libro.entity';
 import { Sede } from './common/entities/sede.entity';
@@ -37,14 +39,14 @@ const LIBROS_POR_SEDE: Record<string, any[]> = {
 
 async function seed() {
   for (const config of SEDES_CONFIG) {
-    console.log(`\n📦 Seeding nodo: ${config.nombre}`);
+    console.log(`\nSeeding nodo: ${config.nombre}`);
 
     const ds = new DataSource({
       type: 'postgres',
-      host: 'localhost',
-      port: config.port,
-      username: 'postgres',
-      password: 'Duvan26-',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASS,
       database: config.dbName,
       entities: [Libro, Sede, Usuario],
       synchronize: true,
@@ -65,7 +67,7 @@ async function seed() {
         direccion: `Sede ${config.nombre} - Universidad Distrital`,
       });
       sede = await sedeRepo.save(sede);
-      console.log(`  ✅ Sede creada: ${sede.nombre} (${sede.id})`);
+      console.log(`  Sede creada: ${sede.nombre} (${sede.id})`);
     }
 
     // Crear libros propios de esta sede
@@ -80,7 +82,7 @@ async function seed() {
           esReplica: false,
         });
         await libroRepo.save(libro);
-        console.log(`  📚 Libro creado: ${libroData.titulo}`);
+        console.log(`  Libro creado: ${libroData.titulo}`);
       }
     }
 
@@ -99,7 +101,7 @@ async function seed() {
               esReplica: true, // ← marcado como réplica
             });
             await libroRepo.save(replica);
-            console.log(`  🔄 Réplica creada: ${libroData.titulo} (de ${otraSede.nombre})`);
+            console.log(`  Replica creada: ${libroData.titulo} (de ${otraSede.nombre})`);
           }
         }
       }
@@ -115,14 +117,14 @@ async function seed() {
         rol: RolUsuario.BIBLIOTECARIO,
       });
       await usuarioRepo.save(usuario);
-      console.log(`  👤 Usuario creado: ${emailPrueba}`);
+      console.log(`  Usuario creado: ${emailPrueba}`);
     }
 
     await ds.destroy();
     console.log(`  ✔  Nodo ${config.nombre} listo`);
   }
 
-  console.log('\n🎉 Seed completado. El sistema está listo para demostrar tolerancia a fallos.');
+  console.log('\nSeed completado. El sistema esta listo para demostrar tolerancia a fallos.');
 }
 
 seed().catch(console.error);
