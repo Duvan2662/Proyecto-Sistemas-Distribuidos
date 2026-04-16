@@ -1,0 +1,42 @@
+{
+  "name": "biblioteca-ud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "seed": "ts-node src/seed.ts",
+    "nodo:ingenieria": "ts-node src/sedes/ingenieria/main.ts",
+    "nodo:tecnologica": "ts-node src/sedes/tecnologica/main.ts",
+    "nodo:artes": "ts-node src/sedes/artes/main.ts",
+    "gateway": "ts-node src/gateway/main.ts",
+    "start:all": "concurrently \"npm run nodo:ingenieria\" \"npm run nodo:tecnologica\" \"npm run nodo:artes\" \"npm run gateway\"",
+    "start:sin-tecnologica": "concurrently \"npm run nodo:ingenieria\" \"npm run nodo:artes\" \"npm run gateway\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.3",
+    "@grpc/proto-loader": "^0.8.0",
+    "@nestjs/common": "^11.1.19",
+    "@nestjs/config": "^4.0.4",
+    "@nestjs/core": "^11.1.19",
+    "@nestjs/microservices": "^11.1.19",
+    "@nestjs/platform-express": "^11.1.19",
+    "@nestjs/typeorm": "^11.0.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "pg": "^8.20.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typeorm": "^0.3.28"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.19",
+    "@types/node": "^25.6.0",
+    "concurrently": "^9.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  }
+}

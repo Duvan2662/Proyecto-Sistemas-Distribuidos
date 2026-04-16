@@ -1,0 +1,52 @@
+# ─── Dependencias ────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ─── Compilación TypeScript ───────────────────────────────────
+dist/
+build/
+*.js.map
+*.d.ts
+
+# ─── Variables de entorno ─────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─── Bases de datos locales (TypeORM / SQLite) ────────────────
+*.sqlite
+*.sqlite3
+*.db
+
+# ─── Logs ─────────────────────────────────────────────────────
+logs/
+*.log
+
+# ─── Caché y temporales ───────────────────────────────────────
+.cache/
+.temp/
+tmp/
+
+# ─── IDEs y editores ──────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── Sistema operativo ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Cobertura de tests ───────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── NestJS específico ────────────────────────────────────────
+.nest/

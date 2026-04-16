@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package biblioteca;
+
+service LibroService {
+  rpc BuscarLibro (BuscarLibroRequest) returns (LibroResponse);
+  rpc ListarLibros (ListarLibrosRequest) returns (ListarLibrosResponse);
+  rpc RealizarPrestamo (PrestamoRequest) returns (PrestamoResponse);
+  rpc DevolverLibro (DevolucionRequest) returns (PrestamoResponse);
+  rpc ReplicarDatos (ReplicaRequest) returns (ReplicaResponse);
+}
+
+message BuscarLibroRequest {
+  string titulo = 1;
+  string sede_origen = 2;
+}
+
+message ListarLibrosRequest {
+  string sede_id = 1;
+}
+
+message ListarLibrosResponse {
+  repeated LibroResponse libros = 1;
+}
+
+message LibroResponse {
+  string id = 1;
+  string titulo = 2;
+  string autor = 3;
+  string isbn = 4;
+  string estado = 5;
+  string sede_nombre = 6;
+  bool es_replica = 7;
+}
+
+message PrestamoRequest {
+  string libro_id = 1;
+  string usuario_id = 2;
+  string sede_id = 3;
+}
+
+message PrestamoResponse {
+  string id = 1;
+  string mensaje = 2;
+  bool exitoso = 3;
+  string estado = 4;
+}
+
+message DevolucionRequest {
+  string prestamo_id = 1;
+}
+
+message ReplicaRequest {
+  string sede_origen = 1;
+  repeated LibroData libros = 2;
+}
+
+message ReplicaResponse {
+  bool exitoso = 1;
+  int32 registros_replicados = 2;
+}
+
+message LibroData {
+  string id = 1;
+  string titulo = 2;
+  string autor = 3;
+  string isbn = 4;
+  string estado = 5;
+  string sede_id = 6;
+}
