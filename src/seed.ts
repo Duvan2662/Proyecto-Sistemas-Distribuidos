@@ -15,9 +15,21 @@ import { Sede } from './common/entities/sede.entity';
 import { Usuario, RolUsuario } from './common/entities/usuario.entity';
 
 const SEDES_CONFIG = [
-  { nombre: 'ingenieria',  dbName: 'biblioteca_ingenieria',  port: 5432 },
-  { nombre: 'tecnologica', dbName: 'biblioteca_tecnologica', port: 5432 },
-  { nombre: 'artes',       dbName: 'biblioteca_artes',       port: 5432 },
+  {
+    nombre: 'ingenieria',
+    dbName: process.env.DB_NAME_INGENIERIA || 'biblioteca_ingenieria',
+    port: parseInt(process.env.DB_PORT) || 5432,
+  },
+  {
+    nombre: 'tecnologica',
+    dbName: process.env.DB_NAME_TECNOLOGICA || 'biblioteca_tecnologica',
+    port: parseInt(process.env.DB_PORT) || 5432,
+  },
+  {
+    nombre: 'artes',
+    dbName: process.env.DB_NAME_ARTES || 'biblioteca_artes',
+    port: parseInt(process.env.DB_PORT) || 5432,
+  },
 ];
 
 const LIBROS_POR_SEDE: Record<string, any[]> = {
