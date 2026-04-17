@@ -1,17 +1,20 @@
 import 'reflect-metadata';
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { NestFactory } from '@nestjs/core';
 import { GatewayModule } from './gateway.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(GatewayModule);
+  const port = process.env.GATEWAY_PORT || '3000';
 
   app.enableCors({
-    origin: '*', // En producción especificar el dominio del frontend Angular
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   });
 
-  await app.listen(3000);
-  console.log('API Gateway corriendo en http://localhost:3000');
+  await app.listen(port);
+  console.log(`API Gateway corriendo en http://localhost:${port}`);
   console.log('   Endpoints disponibles:');
   console.log('   GET  /api/libros/buscar?titulo=X&sede=Y');
   console.log('   GET  /api/libros?sede=Y');

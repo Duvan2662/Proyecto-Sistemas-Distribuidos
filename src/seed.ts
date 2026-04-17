@@ -15,10 +15,22 @@ import { Sede } from './common/entities/sede.entity';
 import { Usuario, RolUsuario } from './common/entities/usuario.entity';
 
 const SEDES_CONFIG = [
-  { nombre: 'ingenieria',  dbName: 'biblioteca_ingenieria',  port: 5432 },
-  { nombre: 'tecnologica', dbName: 'biblioteca_tecnologica', port: 5432 },
-  { nombre: 'artes',       dbName: 'biblioteca_artes',       port: 5432 },
-];
+  process.env.DB_NAME_INGENIERIA && {
+    nombre: 'ingenieria',
+    dbName: process.env.DB_NAME_INGENIERIA,
+    port: parseInt(process.env.DB_PORT) || 5432,
+  },
+  process.env.DB_NAME_TECNOLOGICA && {
+    nombre: 'tecnologica',
+    dbName: process.env.DB_NAME_TECNOLOGICA,
+    port: parseInt(process.env.DB_PORT) || 5432,
+  },
+  process.env.DB_NAME_ARTES && {
+    nombre: 'artes',
+    dbName: process.env.DB_NAME_ARTES,
+    port: parseInt(process.env.DB_PORT) || 5432,
+  },
+].filter(Boolean); // ← elimina los que no están en el .env
 
 const LIBROS_POR_SEDE: Record<string, any[]> = {
   ingenieria: [
